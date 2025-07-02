@@ -210,7 +210,7 @@ export default function ChatWindow({ onBack }) {
 
       {/* Footer */}
       <div className="text-center text-xs text-gray-500 py-2">
-        Powered by <span className="font-medium text-blue-600">ALPL AshutoshLogistics</span>
+        Powered by <span className="font-medium text-blue-600">AshutoshLogistics</span>
       </div>
     </div>
   );

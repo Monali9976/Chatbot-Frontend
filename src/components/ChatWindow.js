@@ -14,17 +14,6 @@ export default function ChatWindow({ onBack }) {
   const [isNameSet, setIsNameSet] = useState(false);
   const [userId, setUserId] = useState("");
 
-  
-
-
-
-  // Make URLs clickable
-  // const formatMessage = (text) => {
-  //   const urlRegex = /(https?:\/\/[^\s]+)/g;
-  //   return text.replace(urlRegex, (url) => {
-  //     return `<a href="${url}" target="_blank" class="text-blue-600 underline">${url}</a>`;
-  //   });
-  // };
   const formatMessage = (text) => {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     return text.replace(urlRegex, (url) => {
@@ -56,71 +45,67 @@ export default function ChatWindow({ onBack }) {
   }, [messages, resetInactivityTimer]);
 
   // Ask for name before starting chat
-if (!isNameSet) {
-  return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <h2 className="text-xl font-semibold mb-4">👋 Welcome!</h2>
-      <p className="mb-2">Before we start, please enter your name:</p>
-      <input
-        type="text"
-        value={userName}
-        onChange={(e) => setUserName(e.target.value)}
-        placeholder="Your name"
-        className="border px-4 py-2 rounded mb-4"
-      />
-      <button
-        onClick={() => {
-          if (userName.trim()) {
-            setUserId(userName.trim());
-            setIsNameSet(true);
-          }
-        }}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        Start Chat
-      </button>
-    </div>
-  );
-}
+// if (!isNameSet) {
+//   return (
+//     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+//       <h2 className="text-xl font-semibold mb-4">👋 Welcome!</h2>
+//       <p className="mb-2">Before we start, please enter your name:</p>
+//       <input
+//         type="text"
+//         value={userName}
+//         onChange={(e) => setUserName(e.target.value)}
+//         placeholder="Your name"
+//         className="border px-4 py-2 rounded mb-4"
+//       />
+//       <button
+//         onClick={() => {
+//           if (userName.trim()) {
+//             setUserId(userName.trim());
+//             setIsNameSet(true);
+//           }
+//         }}
+//         className="bg-blue-600 text-white px-4 py-2 rounded"
+//       >
+//         Start Chat
+//       </button>
+//     </div>
+//   );
+// }
 
-  // const sendMessage = async () => {
-  //   if (!input.trim()) return;
+  
+  if (!isNameSet) {
+    const handleStartChat = (e) => {
+      e.preventDefault(); // prevent page reload
+      if (userName.trim()) {
+        setUserId(userName.trim());
+        setIsNameSet(true);
+      }
+    };
 
-  //   const userMsg = { from: 'user', text: input };
-  //   setMessages(prev => [...prev, userMsg]);
-  //   setInput("");
-  //   setMessageCount(prev => prev + 1);
-  //   resetInactivityTimer();
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+        <h2 className="text-xl font-semibold mb-4">👋 Welcome!</h2>
+        <p className="mb-2">Before we start, please enter your name:</p>
 
-  //   try {
-  //     const res = await fetch("http://localhost:5000/api/chat", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ message: input }),
-  //     });
+        <form onSubmit={handleStartChat} className="flex flex-col items-center">
+          <input
+            type="text"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+            placeholder="Your name"
+            className="border px-4 py-2 rounded mb-4"
+          />
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-4 py-2 rounded"
+          >
+            Start Chat
+          </button>
+        </form>
+      </div>
+    );
+  }
 
-  //     const data = await res.json();
-  //     const botMsg = { from: 'bot', text: data.reply };
-  //     setMessages(prev => [...prev, botMsg]);
-  //   } catch {
-  //     setMessages(prev => [
-  //       ...prev,
-  //       { from: 'bot', text: "Something went wrong. Try again." }
-  //     ]);
-  //   }
-
-  //   // Send form after 5 messages
-  //   if (messageCount + 1 >= 5 && !formSent) {
-  //     setMessages(prev => [
-  //       ...prev,
-  //       {
-  //         from: 'bot',
-  //         text: `Are you interested in our services? Please fill this short form: ${GOOGLE_FORM_LINK}`
-  //       }
-  //     ]);
-  //     setFormSent(true);
-  //   }
-  // };
   const sendMessage = async () => {
     const messageToSend = input.trim();
     if (!messageToSend) return;
@@ -185,21 +170,43 @@ if (!isNameSet) {
         ))}
       </div>
 
-      {/* Input Box */}
-      <div className="flex p-3 border-t bg-white">
+      // {/* Input Box */}
+      // <div className="flex p-3 border-t bg-white">
+      //   <input
+      //     value={input}
+      //     onChange={e => setInput(e.target.value)}
+      //     className="flex-1 border rounded-l-lg px-4 py-2 outline-none text-sm"
+      //     placeholder="Type your message here..."
+      //   />
+      //   <button
+      //     onClick={sendMessage}
+      //     className="bg-black text-white px-4 py-2 rounded-r-lg text-sm"
+      //   >
+      //     Send
+      //   </button>
+      // </div>
+
+
+ <form
+        onSubmit={(e) => {
+          e.preventDefault(); // prevent page reload
+          sendMessage();
+        }}
+        className="flex p-3 border-t bg-white"
+      >
         <input
           value={input}
-          onChange={e => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           className="flex-1 border rounded-l-lg px-4 py-2 outline-none text-sm"
           placeholder="Type your message here..."
         />
         <button
-          onClick={sendMessage}
+          type="submit"
           className="bg-black text-white px-4 py-2 rounded-r-lg text-sm"
         >
           Send
         </button>
-      </div>
+      </form>
 
       {/* Footer */}
       <div className="text-center text-xs text-gray-500 py-2">

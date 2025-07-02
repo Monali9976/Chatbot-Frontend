@@ -203,7 +203,7 @@ if (!isNameSet) {
 
       {/* Footer */}
       <div className="text-center text-xs text-gray-500 py-2">
-        Powered by <span className="font-medium text-blue-600">AssistLoop.ai</span>
+        Powered by <span className="font-medium text-blue-600">ALPL AshutoshLogistics</span>
       </div>
     </div>
   );

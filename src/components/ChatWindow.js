@@ -36,7 +36,7 @@ export default function ChatWindow({ onBack }) {
         }
       ]);
       setFormSent(true);
-    }, 30000); // 30 seconds
+    }, 50000); // 30 seconds
   }, [formSent]);
 
   useEffect(() => {
@@ -170,23 +170,6 @@ export default function ChatWindow({ onBack }) {
         ))}
       </div>
 
-      // {/* Input Box */}
-      // <div className="flex p-3 border-t bg-white">
-      //   <input
-      //     value={input}
-      //     onChange={e => setInput(e.target.value)}
-      //     className="flex-1 border rounded-l-lg px-4 py-2 outline-none text-sm"
-      //     placeholder="Type your message here..."
-      //   />
-      //   <button
-      //     onClick={sendMessage}
-      //     className="bg-black text-white px-4 py-2 rounded-r-lg text-sm"
-      //   >
-      //     Send
-      //   </button>
-      // </div>
-
-
  <form
         onSubmit={(e) => {
           e.preventDefault(); // prevent page reload
@@ -202,7 +185,7 @@ export default function ChatWindow({ onBack }) {
         />
         <button
           type="submit"
-          className="bg-black text-white px-4 py-2 rounded-r-lg text-sm"
+          className="bg-black text-white pxa-4 py-2 rounded-r-lg text-sm"
         >
           Send
         </button>

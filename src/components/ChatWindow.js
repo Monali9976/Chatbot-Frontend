@@ -44,33 +44,6 @@ export default function ChatWindow({ onBack }) {
     return () => clearTimeout(timeoutRef.current);
   }, [messages, resetInactivityTimer]);
 
-  // Ask for name before starting chat
-// if (!isNameSet) {
-//   return (
-//     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-//       <h2 className="text-xl font-semibold mb-4">👋 Welcome!</h2>
-//       <p className="mb-2">Before we start, please enter your name:</p>
-//       <input
-//         type="text"
-//         value={userName}
-//         onChange={(e) => setUserName(e.target.value)}
-//         placeholder="Your name"
-//         className="border px-4 py-2 rounded mb-4"
-//       />
-//       <button
-//         onClick={() => {
-//           if (userName.trim()) {
-//             setUserId(userName.trim());
-//             setIsNameSet(true);
-//           }
-//         }}
-//         className="bg-blue-600 text-white px-4 py-2 rounded"
-//       >
-//         Start Chat
-//       </button>
-//     </div>
-//   );
-// }
 
   
   if (!isNameSet) {
